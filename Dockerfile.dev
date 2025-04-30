@@ -1,24 +1,33 @@
+# Base build stage
 FROM node:20 AS base
 WORKDIR /app
-RUN npm i -g pnpm
-RUN npm i -g next
-COPY package*.json ./
 
+# Install pnpm
+RUN npm i -g pnpm
+
+# Copy only what’s needed for installing deps
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
+# Copy the rest of the project
 COPY . .
 
-FROM node:20-alpine3.19 as release
+# Final runtime image
+FROM node:20-alpine3.19 AS release
 WORKDIR /app
+
+# Install pnpm
 RUN npm i -g pnpm
 
-#RUN npm i -g tailwindcss postcss autoprefixer
-
+# Copy installed deps and source
 COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/package.json ./package.json
-COPY --from=base /app/app ./app
 COPY --from=base /app .
 
+# Make sure .env is copied if it exists
+COPY .env .env
+
+# Expose port (default Next.js dev port)
 EXPOSE 3000
 
-CMD ["pnpm", "dev"]
+# Use HOST and PORT from env (via Docker env or .env)
+CMD ["pnpm", "dev", "-H", "0.0.0.0", "-p", "3000"]
