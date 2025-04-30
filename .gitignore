@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+.next/
+out/
+
+# Production
+dist/
+build/
+
+# Environment variables
+.env
+README.md
+# Logs
+logs/
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Misc
+.vscode/
+*.local
+
+# Tailwind and PostCSS cache
+.postcss-cache/
+
+# Optional: lock files (if you want to ignore them)
+# package-lock.json
+# yarn.lock
