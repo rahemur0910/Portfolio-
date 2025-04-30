@@ -9,8 +9,8 @@ yarn-error.log*
 out/
 
 # Production
-dist/
-build/
+#dist/
+#build/
 
 # Environment variables
 .env
@@ -24,14 +24,14 @@ logs/
 Thumbs.db
 
 # Docker
-docker-compose.override.yml
+#docker-compose.override.yml
 
 # Misc
 .vscode/
 *.local
 
 # Tailwind and PostCSS cache
-.postcss-cache/
+#.postcss-cache/
 
 # Optional: lock files (if you want to ignore them)
 # package-lock.json
